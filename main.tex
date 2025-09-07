@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[a4paper, includeheadfoot, margin=2.54cm]{geometry}
+
+\renewcommand\thesection{\arabic{section}.}
+
+\title{Assignment 1}
+\author{Shaya Yazdi \and Arvid Persson}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+\begin{proof}
+    The proof is by induction. Let the list be $S$ with $|S| = n < \infty$.
+
+    For $n = 0$, the empty tree is a treap. For $n = 1$, the single node is a
+    treap. Assume there exists exactly one treap for any list smaller than $S$
+    with the same properties.
+
+    As the priorities are distinct, there exists a $r = (k_0, p_0) \in S$ such
+    that $\forall (k, p) \in S \setminus r: p_0 > p$. Let $L = \{ (k, p) \in S:
+    k < k_0 \}, R = \{ (k, p) \in S: k > k_0 \}$, meaning $S = L \cup \{r\}
+    \cup R$. Consider the treaps constructed from $L, R$ respectively: By the
+    inductive hypothesis, since $L, R \subset S$, these exist and are unique.
+
+    Construct the tree with $r$ as the root, satisfying the heap property, and
+    $L, R$ as its left and right subtrees respectively, satisfying the binary
+    tree property. As any subtree of a treap is itself a treap, this tree is
+    unique, and by $p_0$ being the highest priority, a treap.
+\end{proof}
+
+\section{}
+
+Let $A(i, j)$ determine whether $k_i$ is an ancestor of $k_j$ in $T$. An
+inorder traversal of a binary tree produces a sorted list. As such, for $k_i$
+to be an ancestor of $k_j$, it must be the highest priority key in the
+inclusive interval between them in the list. There are $|i - j| + 1$ such
+nodes, each equally likely to have the highest priority. If we define a node to
+never be an ancestor of itself, we find
+
+\begin{equation*}
+    \Pr(A(i, j)) =
+    \begin{cases}
+	0 & i = j, \\
+	\frac{1}{|i - j| + 1} & i \neq j.
+    \end{cases}
+\end{equation*}
+
+\end{document}
